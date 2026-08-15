@@ -4,10 +4,10 @@ GET {{JobTrackerApi_HostAddress}}/jobapplications/
 Accept: application/json
 
 ###
-POST {{JobTrackerApi_HostAddress}}/jobapplications/
+PUT {{JobTrackerApi_HostAddress}}/jobapplications/2
 Content-Type: application/json
 
 {
-  "id": 2,"company":"Mconalds","position":"Junior Developer","status":"Interview"
+  "id": 2,"company":"  ","position":"FrontEnd","status":"Interview"
 }
 

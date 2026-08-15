@@ -12,7 +12,7 @@ namespace JobTrackerApi.Models
 
         public JobApplication(string company, string position)
         {
-            if (string.IsNullOrWhiteSpace(company))
+            if (string.IsNullOrWhiteSpace(company) || string.IsNullOrWhiteSpace(position))
             {
                 throw new ArgumentException("Wela eri det forkert");
             }

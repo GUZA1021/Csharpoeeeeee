@@ -1,6 +1,9 @@
 
 using JobTrackerApi.Data;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace JobTrackerApi
 
@@ -26,6 +29,31 @@ namespace JobTrackerApi
 
             var app = builder.Build();
 
+            if (!app.Environment.IsProduction())
+            {
+                app.UseExceptionHandler(exceptionHandlerApp =>
+                {
+                    exceptionHandlerApp.Run(async context =>
+                    {
+                        var response = context.Response;
+                        //Set response Contentype
+                        response.ContentType = "application/json";
+
+                        //get the exception objekt
+                        var exceptionFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+
+                        response.StatusCode = 400;
+
+                        await response.WriteAsJsonAsync(exceptionFeature.Error.Message);
+                        
+
+
+
+
+                    });
+                });
+            }
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -40,6 +68,7 @@ namespace JobTrackerApi
             app.MapControllers();
 
             app.Run();
+
         }
     }
 }
