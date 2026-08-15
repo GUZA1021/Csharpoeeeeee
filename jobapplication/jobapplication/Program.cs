@@ -11,13 +11,13 @@ namespace jobapplication
 
         public JobApplication(string company, string position)
         {
-            Company = company;
-            Position = position;
-            Status = Status.Applied;
             if (string.IsNullOrWhiteSpace(company))
             {
                 throw new ArgumentException("Wela eri det forkert");
             }
+            Company = company;
+            Position = position;
+            Status = Status.Applied;
         }
         public string Jobs()
         {
@@ -29,15 +29,15 @@ namespace jobapplication
     {
         static void Main(string[] args)
         {
-            List<JobApplication> list = new List<JobApplication> {new JobApplication("Google","Backend"), new JobApplication(null, "Frontend"), new JobApplication("youtube", "backend") };
-            list[1].Status = Status.Interview;
+            List<JobApplication> list = new List<JobApplication> {new JobApplication("Google","Backend"), new JobApplication("youtube", "backend") };
             try
             {
-                int i = int.Parse(Console.ReadLine());
+                JobApplication invalid = new JobApplication(null, "backend");
+                list.Add(invalid);
             }
-            catch (Exception a)
+            catch (ArgumentException ex)
             {
-                throw new Exception("hej");
+                Console.WriteLine("Fejl ved oprettelse, null værdi");
             }
             foreach (JobApplication app in list) {
                 Console.WriteLine(app.Jobs());

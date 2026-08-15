@@ -1,0 +1,13 @@
+@JobTrackerApi_HostAddress = http://localhost:5043
+
+GET {{JobTrackerApi_HostAddress}}/jobapplications/
+Accept: application/json
+
+###
+POST {{JobTrackerApi_HostAddress}}/jobapplications/
+Content-Type: application/json
+
+{
+  "id": 2,"company":"Mconalds","position":"Junior Developer","status":"Interview"
+}
+
