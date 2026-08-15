@@ -8,6 +8,6 @@ PUT {{JobTrackerApi_HostAddress}}/jobapplications/2
 Content-Type: application/json
 
 {
-  "id": 2,"company":"  ","position":"FrontEnd","status":"Interview"
+  "id": 2,"company":"hej","position":"FrontEnd","status": 1
 }
 
