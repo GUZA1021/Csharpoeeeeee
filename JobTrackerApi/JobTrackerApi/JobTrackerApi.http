@@ -1,6 +1,6 @@
 @JobTrackerApi_HostAddress = http://localhost:5043
 
-GET {{JobTrackerApi_HostAddress}}/jobapplications/
+GET {{JobTrackerApi_HostAddress}}/jobapplications/5
 Accept: application/json
 
 ###

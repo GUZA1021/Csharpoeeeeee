@@ -2,6 +2,7 @@
 using JobTrackerApi.Models;
 using JobTrackerApi.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace JobTrackerApi.Controllers {
     [ApiController]
@@ -17,16 +18,30 @@ namespace JobTrackerApi.Controllers {
 
 
         [HttpGet(Name = "GetJobApplications")]
-        public IEnumerable<JobApplication> Get() {
-            return _context.JobApplications;
+        public async Task<IActionResult> Get() {
+            var allApplications = await _context.JobApplications.ToListAsync();
+            return Ok(allApplications);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] JobApplication newApplication)
+        public async Task<IActionResult> Post([FromBody] JobApplication newApplication)
         {
             _context.JobApplications.Add(newApplication);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(newApplication);
+        }
+
+        [HttpGet("{id:Int}")]
+        public async Task<IActionResult> Get(int id) {
+            var jobApplicationId = await _context.JobApplications.FindAsync(id);
+            if (jobApplicationId == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(jobApplicationId);
+
+            
         }
 
         [HttpDelete("{id:Int}")]
