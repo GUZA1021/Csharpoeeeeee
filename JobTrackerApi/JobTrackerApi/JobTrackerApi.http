@@ -4,10 +4,10 @@ GET {{JobTrackerApi_HostAddress}}/jobapplications/5
 Accept: application/json
 
 ###
-PUT {{JobTrackerApi_HostAddress}}/jobapplications/2
+POST {{JobTrackerApi_HostAddress}}/auth/register
 Content-Type: application/json
 
 {
-  "id": 2,"company":"hej","position":"FrontEnd","status": 1
+  "email":"live@live.dk","userName":"gegegegeg","password": "Karim1", "ConfirmPassword" : "Karim1"
 }
 

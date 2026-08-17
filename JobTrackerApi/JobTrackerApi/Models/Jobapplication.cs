@@ -5,6 +5,8 @@ namespace JobTrackerApi.Models
     public class JobApplication
     {
         public int Id { get; private set; } // Private set gør at det er kun selve klassen og ingen andre som kan redigere variablen
+        public int UserId { get;  set; } //foreign key til users skal tilføjes
+        public User User { get; set; }
         [Required]
         public string Company { get; set; }
         [Required]
@@ -14,15 +16,9 @@ namespace JobTrackerApi.Models
 
         public JobApplication(string company, string position)
         {
-
             Company = company;
             Position = position;
             Status = Status.Applied;
         }
-        public string Jobs()
-        {
-            return $"Ansøgning hos {Company} as a {Position} and the status is : {Status}";
-        }
     }
-
 }

@@ -45,11 +45,6 @@ namespace JobTrackerApi
                         response.StatusCode = 400;
 
                         await response.WriteAsJsonAsync(exceptionFeature.Error.Message);
-                        
-
-
-
-
                     });
                 });
             }

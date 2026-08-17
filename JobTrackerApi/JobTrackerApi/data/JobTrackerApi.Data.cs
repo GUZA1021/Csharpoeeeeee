@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using JobTrackerApi.Models;
 
+
 namespace JobTrackerApi.Data
 {
     public class JobTrackerDbContext : DbContext
@@ -10,8 +11,8 @@ namespace JobTrackerApi.Data
         }
 
         public DbSet<JobApplication> JobApplications { get; set; }
-
-} 
+        public DbSet<User> Users { get; set; }
+    } 
 }
 
 
