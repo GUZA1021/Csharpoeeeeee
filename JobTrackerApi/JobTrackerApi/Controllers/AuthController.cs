@@ -1,24 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JobTrackerApi.Data;
 using JobTrackerApi.Models;
-using JobTrackerApi.Data;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using RegisterRequest = JobTrackerApi.Authentication.RegisterRequest;
-using LoginRequest = JobTrackerApi.Authentication.LoginRequest;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-//Husk at lave update password og fix at din database password er exposed
+using System.Text;
+using LoginRequest = JobTrackerApi.Authentication.LoginRequest;
+using RegisterRequest = JobTrackerApi.Authentication.RegisterRequest;
+
+//Husk at lave update password
 namespace JobTrackerApi.Controllers{
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase 
     {
         private readonly JobTrackerDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(JobTrackerDbContext context)
+        public AuthController(JobTrackerDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
+
+        
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
@@ -64,15 +72,18 @@ namespace JobTrackerApi.Controllers{
                 existingUser.PasswordHash = newHash;
                 _context.Users.Update(existingUser);
                 await _context.SaveChangesAsync();
-                return Ok();
-                
             }
 
             var claims = new List<Claim>{ 
                 new Claim(ClaimTypes.NameIdentifier,existingUser.Id.ToString())
             }; //måske lav en list emed lidt mere
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(issuer: "JobTrackerApi", audience: "MyAudience", claims: claims, notBefore: DateTime.UtcNow, expires: DateTime.UtcNow.AddMinutes(120), signingCredentials: signingCredentials);
+            var handleToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(Token);
+
+            return Ok(handleToken);
 
 
         }

@@ -1,8 +1,8 @@
-@JobTrackerApi_HostAddress = http://localhost:5043
+@JobTrackerApi_HostAddress = https://localhost:7091
 
-GET {{JobTrackerApi_HostAddress}}/jobapplications/5
+GET {{JobTrackerApi_HostAddress}}/jobapplications/
 Accept: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJuYmYiOjE3ODcwODU5NjIsImV4cCI6MTc4NzIwNTk2MiwiaXNzIjoiSm9iVHJhY2tlckFwaSIsImF1ZCI6Ik15QXVkaWVuY2UifQ.SGpD7LoLH4BAG49HK0WOHU-RJt2AhGX5rF3lmt_fMbg
 ###
 POST {{JobTrackerApi_HostAddress}}/auth/register
 Content-Type: application/json
@@ -10,4 +10,14 @@ Content-Type: application/json
 {
   "email":"live@live.dk","userName":"gegegegeg","password": "Karim1", "ConfirmPassword" : "Karim1"
 }
+
+###
+POST {{JobTrackerApi_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+  "InputEmail":"live@live.dk","InputPassword": "Karim1"
+}
+
+
 
