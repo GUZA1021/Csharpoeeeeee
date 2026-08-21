@@ -79,7 +79,7 @@ namespace JobTrackerApi.Controllers{
             }; //måske lav en list emed lidt mere
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(issuer: "JobTrackerApi", audience: "MyAudience", claims: claims, notBefore: DateTime.UtcNow, expires: DateTime.UtcNow.AddMinutes(120), signingCredentials: signingCredentials);
+            var token = new JwtSecurityToken(issuer: "JobTrackerApi", audience: "MyAudience", claims: claims, notBefore: DateTime.UtcNow, expires: DateTime.UtcNow.AddMinutes(120), signingCredentials: signingCredentials); //ændrer det brug refresh tokens istedet
             var handleToken = new JwtSecurityTokenHandler().WriteToken(token);
 
 

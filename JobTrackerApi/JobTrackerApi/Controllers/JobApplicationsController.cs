@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace JobTrackerApi.Controllers {
     [ApiController]
@@ -28,6 +29,14 @@ namespace JobTrackerApi.Controllers {
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] JobApplication newApplication)
         {
+            var checkUser = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (checkUser == null) {
+                return Unauthorized();
+            }
+            
+            var userPostAuth = int.Parse(checkUser.Value);
+            newApplication.UserId = userPostAuth; // istedet så måske lav ClaimType.id direkte
+            
             _context.JobApplications.Add(newApplication);
             await _context.SaveChangesAsync();
             return Ok(newApplication);
