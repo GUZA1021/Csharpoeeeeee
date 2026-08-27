@@ -14,7 +14,7 @@ function App() {
       body: JSON.stringify({ InputEmail: email, InputPassword : password })
     })
     const data = await response.json()
-    setToken(data)
+    setToken(data.token)
   }
 
   return (

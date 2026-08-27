@@ -83,8 +83,7 @@ namespace JobTrackerApi.Controllers{
             var handleToken = new JwtSecurityTokenHandler().WriteToken(token);
 
 
-            return Ok(handleToken);
-
+            return Ok(new { token = handleToken});
 
         }
 
