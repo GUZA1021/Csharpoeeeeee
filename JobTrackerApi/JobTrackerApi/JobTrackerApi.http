@@ -2,7 +2,8 @@
 
 GET {{JobTrackerApi_HostAddress}}/jobapplications/
 Accept: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJuYmYiOjE3ODgxOTY0NjgsImV4cCI6MTc4ODIwMzY2OCwiaXNzIjoiSm9iVHJhY2tlckFwaSIsImF1ZCI6Ik15QXVkaWVuY2UifQ.YZpvyPHrtQ-llGpJEnIPaD4iyjDFVOgQ_HbSZFiRZQA
+
 ###
 POST {{JobTrackerApi_HostAddress}}/auth/register
 Content-Type: application/json
@@ -19,5 +20,12 @@ Content-Type: application/json
   "InputEmail":"live@live.dk","InputPassword": "Karim1"
 }
 
+###
+POST {{JobTrackerApi_HostAddress}}/jobapplications
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJuYmYiOjE3ODgxOTY0NjgsImV4cCI6MTc4ODIwMzY2OCwiaXNzIjoiSm9iVHJhY2tlckFwaSIsImF1ZCI6Ik15QXVkaWVuY2UifQ.YZpvyPHrtQ-llGpJEnIPaD4iyjDFVOgQ_HbSZFiRZQA
 
-
+{
+  "company": "Test Firma",
+  "position": "Test Stilling"
+}
