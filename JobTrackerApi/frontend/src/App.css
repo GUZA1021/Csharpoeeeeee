@@ -1,118 +1,565 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6fa;
+  color: #1f2937;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
 #center {
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  background: #f5f7fb;
+
+  gap: 14px;
+  padding: 30px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #eef2ff,
+    #f8fafc
+  );
 }
 
 #center h1 {
-  margin: 0 0 10px;
-  font-size: 28px;
-  color: #222;
+  margin: 0 0 15px;
+
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  color: #111827;
 }
 
 #center input {
-  width: 300px;
-  padding: 12px 14px;
-  border: 1px solid #d0d5dd;
-  border-radius: 8px;
-  font-size: 15px;
-  box-sizing: border-box;
-  outline: none;
+  width: 320px;
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+
   background: white;
-  transition: border-color 0.2s, box-shadow 0.2s;
+
+  font-size: 15px;
+  outline: none;
+
+  transition: 0.2s ease;
 }
 
 #center input:focus {
-  border-color: #646cff;
-  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.15);
-}
+  border-color: #6366f1;
 
-button {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s, opacity 0.15s;
-}
-
-button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.12);
 }
 
 .login {
-  width: 300px;
-  background: #646cff;
+  width: 320px;
+  height: 46px;
+
+  margin-top: 5px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #6366f1;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.login:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   TOP BUTTONS
+========================= */
+
+body > div > div > .AddApplication {
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+/* Logout */
+
+body > div > div > .AddApplication:first-child {
+  margin: 25px 10px 25px calc(50% - 450px);
+
+  background: #374151;
   color: white;
 }
+
+body > div > div > .AddApplication:first-child:hover {
+  background: #1f2937;
+}
+
+
+/* Add new application */
+
+body > div > div > .AddApplication:nth-child(2) {
+  margin: 25px 0;
+
+  background: #6366f1;
+  color: white;
+}
+
+body > div > div > .AddApplication:nth-child(2):hover {
+  background: #4f46e5;
+}
+
+
+/* =========================
+   APPLICATION CARD
+========================= */
+
+.job-card {
+  width: 900px;
+  max-width: calc(100% - 40px);
+
+  min-height: 70px;
+
+  margin: 12px auto;
+  padding: 14px 18px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 18px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.04);
+
+  transition: 0.2s ease;
+}
+
+.job-card:hover {
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.07);
+
+  transform: translateY(-1px);
+}
+
+
+/* Company */
+
+.job-card strong {
+  width: 180px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #111827;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Position */
+
+.job-card > span:nth-of-type(1) {
+  width: 230px;
+
+  font-size: 14px;
+
+  color: #64748b;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Status */
+
+.job-card > span:nth-of-type(2) {
+  width: 120px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #6366f1;
+}
+
+
+/* =========================
+   EDIT + DELETE BUTTONS
+========================= */
+
+.job-card .AddApplication {
+  height: 36px;
+
+  padding: 0 13px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+/* Delete */
+
+.job-card .AddApplication:first-of-type {
+  background: #fef2f2;
+  color: #dc2626;
+
+  border: 1px solid #fecaca;
+}
+
+.job-card .AddApplication:first-of-type:hover {
+  background: #fee2e2;
+}
+
+
+/* Edit */
+
+.job-card .AddApplication:last-of-type {
+  background: #eef2ff;
+  color: #4f46e5;
+
+  border: 1px solid #c7d2fe;
+}
+
+.job-card .AddApplication:last-of-type:hover {
+  background: #e0e7ff;
+}
+
+
+/* =========================
+   EDITING APPLICATION
+========================= */
+
+/*
+   Når du trykker Edit bliver
+   #company lagt INDEN I .job-card.
+
+   Derfor styler vi den specielt her.
+*/
+
+.job-card #company {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 12px;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* Edit inputs */
+
+.job-card #company input,
+.job-card #company select {
+  height: 38px;
+
+  padding: 0 10px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+
+  background: #f9fafb;
+
+  font-size: 14px;
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.job-card #company input:focus,
+.job-card #company select:focus {
+  border-color: #6366f1;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+
+/* Company edit input */
+
+.job-card #company input:nth-of-type(1) {
+  width: 180px;
+}
+
+
+/* Position edit input */
+
+.job-card #company input:nth-of-type(2) {
+  width: 230px;
+}
+
+
+/* Status select */
+
+.job-card #company select {
+  width: 120px;
+}
+
+
+/* Save */
+
+.job-card #company .AddApplication {
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: #16a34a;
+  color: white;
+
+  border: none;
+}
+
+.job-card #company .AddApplication:hover {
+  background: #15803d;
+}
+
+
+/* Cancel */
+
+.job-card #company .AddApplication:last-child {
+  background: #f1f5f9;
+  color: #475569;
+
+  border: 1px solid #e2e8f0;
+}
+
+.job-card #company .AddApplication:last-child:hover {
+  background: #e2e8f0;
+}
+
+
+/* =========================
+   ADD APPLICATION FORM
+========================= */
 
 #company {
-  width: 300px;
+  width: 500px;
+  max-width: calc(100% - 40px);
+
+  margin: 30px auto 50px;
+  padding: 24px;
+
   display: flex;
   flex-direction: column;
+
   gap: 12px;
-  margin-top: 20px;
-  padding: 20px;
+
   background: white;
+
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
-#company button {
-  background: #222;
-  color: white;
-}
 
-#center > div:not(#company) {
-  width: 300px;
-  padding: 14px 16px;
-  background: white;
+/* Add form inputs */
+
+#company > input,
+#company > select {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d1d5db;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
+
+  background: #f9fafb;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
 }
 
-#center > div:not(#company) {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+#company > input:focus,
+#company > select:focus {
+  border-color: #6366f1;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-@media (max-width: 500px) {
-  #center input,
-  .login,
-  #company,
-  #center > div:not(#company) {
-    width: 100%;
-    max-width: 320px;
+
+/* Add button */
+
+#company > .AddApplication {
+  height: 44px;
+
+  margin-top: 4px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #6366f1;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+#company > .AddApplication:hover {
+  background: #4f46e5;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   GENERAL BUTTON EFFECT
+========================= */
+
+button {
+  font-family: inherit;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 950px) {
+  body > div > div > .AddApplication:first-child {
+    margin-left: 20px;
+  }
+
+  .job-card {
+    width: calc(100% - 40px);
   }
 }
 
-.job-card {
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 16px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
+
+@media (max-width: 700px) {
+  .job-card {
+    flex-wrap: wrap;
+
+    padding: 16px;
+  }
+
+  .job-card strong,
+  .job-card > span:nth-of-type(1),
+  .job-card > span:nth-of-type(2) {
+    width: auto;
+  }
+
+  .job-card #company {
+    flex-wrap: wrap;
+  }
+
+  .job-card #company input,
+  .job-card #company select {
+    flex: 1;
+    min-width: 140px;
+  }
 }
 
-.job-card strong {
-  font-size: 17px;
-  color: #222;
+
+@media (max-width: 450px) {
+  #center input,
+  .login {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  body > div > div > .AddApplication:first-child,
+  body > div > div > .AddApplication:nth-child(2) {
+    margin: 15px 5px;
+  }
+
+  .job-card {
+    width: calc(100% - 24px);
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+  .job-card strong,
+  .job-card > span:nth-of-type(1),
+  .job-card > span:nth-of-type(2) {
+    width: 100%;
+  }
+
+  .job-card #company {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .job-card #company input,
+  .job-card #company select {
+    width: 100%;
+  }
+
+  #company {
+    width: calc(100% - 24px);
+  }
 }
 
-.job-card span {
-  color: #666;
-}

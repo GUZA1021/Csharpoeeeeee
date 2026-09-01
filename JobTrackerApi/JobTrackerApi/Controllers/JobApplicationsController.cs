@@ -1,4 +1,5 @@
 ﻿using JobTrackerApi.Data;
+using JobTrackerApi.Migrations;
 using JobTrackerApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -22,7 +23,7 @@ namespace JobTrackerApi.Controllers {
 
         [HttpGet(Name = "GetJobApplications")]
         public async Task<IActionResult> Get() {
-            var allApplications = await _context.JobApplications.ToListAsync();
+            var allApplications = await _context.JobApplications.OrderBy(j => j.Id).ToListAsync();
             return Ok(allApplications);
         }
 
