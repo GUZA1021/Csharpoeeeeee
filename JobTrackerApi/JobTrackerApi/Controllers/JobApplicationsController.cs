@@ -4,6 +4,7 @@ using JobTrackerApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -26,7 +27,7 @@ namespace JobTrackerApi.Controllers {
             var allApplications = await _context.JobApplications.OrderBy(j => j.Id).ToListAsync();
             return Ok(allApplications);
         }
-
+        [EnableRateLimiting("fixed")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] JobApplication newApplication)
         {

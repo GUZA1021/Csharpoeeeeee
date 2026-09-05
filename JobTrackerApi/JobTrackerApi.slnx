@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="JobTrackerApi.Tests/JobTrackerApi.Tests.csproj" />
   <Project Path="JobTrackerApi/JobTrackerApi.csproj" />
 </Solution>

@@ -3,6 +3,7 @@ using JobTrackerApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,6 +16,7 @@ using RegisterRequest = JobTrackerApi.Authentication.RegisterRequest;
 namespace JobTrackerApi.Controllers{
     [ApiController]
     [Route("[controller]")]
+    
     public class AuthController : ControllerBase 
     {
         private readonly JobTrackerDbContext _context;
@@ -47,7 +49,7 @@ namespace JobTrackerApi.Controllers{
             return Ok(new { newUser.Id, newUser.Email, newUser.UserName });
 
         }
-
+        [EnableRateLimiting("fixed")]
         [HttpPost("Login")]
 
         public async Task<IActionResult> Login([FromBody] LoginRequest login)

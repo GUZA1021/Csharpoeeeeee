@@ -3,10 +3,12 @@ using JobTrackerApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
+using System.Threading.RateLimiting;
 
 namespace JobTrackerApi
 
@@ -67,6 +69,22 @@ namespace JobTrackerApi
                           .AllowAnyMethod());
             });
 
+            builder.Services.AddRateLimiter(options =>
+            {
+                options.AddFixedWindowLimiter("fixed", opt =>
+                {
+                    opt.PermitLimit = 4;
+                    opt.Window = TimeSpan.FromSeconds(12);
+                    opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                    opt.QueueLimit = 2;
+                    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+                }
+                );
+            }
+            );
+
+            
+
             var app = builder.Build();
 
             if (!app.Environment.IsProduction())
@@ -101,7 +119,8 @@ namespace JobTrackerApi
             app.UseCors("AllowFrontend");
             app.UseAuthentication();
             app.UseAuthorization();
-            
+            app.UseRateLimiter();
+
 
             app.MapControllers();
 

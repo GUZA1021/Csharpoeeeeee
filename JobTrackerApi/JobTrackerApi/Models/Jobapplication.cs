@@ -14,11 +14,14 @@ namespace JobTrackerApi.Models
         [EnumDataType(typeof(Status))]
         public Status Status { get; set; }
 
-        public JobApplication(string company, string position)
+        public JobApplication( string company, string position)
         {
             Company = company;
             Position = position;
             Status = Status.Applied;
+        }
+        public JobApplication(int id, string company, string position) : this(company,position) {
+                Id = id;
         }
     }
 }
