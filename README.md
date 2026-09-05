@@ -10,6 +10,7 @@ A full-stack web app for tracking job applications — built from scratch as a l
 - Inline editing directly on each application card (no page navigation needed)
 - Applications are scoped per user — the backend derives the owner from the JWT, never from client input
 - Responsive layout
+- Rate limiting on `/auth/login` and `POST /jobapplications` to prevent brute-force and spam
 
 ## Tech stack
 
@@ -78,8 +79,6 @@ The frontend runs by default at `http://localhost:5173`.
 - **Secrets** (database connection string, JWT signing key) are kept out of source control via .NET User Secrets in development.
 
 ## Planned improvements
-
-- Rate limiting on `/auth/login` and `POST /jobapplications` to prevent brute-force and spam
 - Automated tests (unit + integration)
 - Deployment (Docker + hosting)
 - Machine learning and AI for CV review
